@@ -1,18 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Web3 Network</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mavis-ican Registry Authority</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #121212; color: #fff; padding-top: 50px; }
-        h1 { color: #00ffcc; }
-        .card { border: 1px solid #333; padding: 20px; display: inline-block; border-radius: 8px; background: #1e1e1e; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background: #0f0f12; color: #fff; padding-top: 50px; margin: 0; }
+        .card { border: 1px solid #27272a; padding: 40px 20px; display: inline-block; border-radius: 12px; background: #18181b; max-width: 500px; width: 90%; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        h1 { color: #22c55e; margin-bottom: 5px; font-size: 28px; }
+        p { color: #a1a1aa; margin-bottom: 30px; font-size: 15px; }
+        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #3f3f46; background: #09090b; color: #fff; font-size: 16px; outline: none; }
+        input:focus { border-color: #22c55e; }
+        button { padding: 12px 24px; border-radius: 6px; border: none; background: #22c55e; color: #000; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #4ade80; }
+        #result { padding: 15px; border-radius: 6px; font-weight: bold; margin-top: 15px; display: none; text-align: left; font-size: 14px; }
+        .available { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; }
+        .taken { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f87171; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>🌐 Welcome to the Alternative Internet</h1>
-        <p>This page is hosted directly on a private smartphone network infrastructure.</p>
-        <p>Bypassing centralized authorities smoothly.</p>
+        <h1>🌐 Mavis-ican Registry Engine</h1>
+        <p>Decentralized Global Domain Authority Infrastructure</p>
+        
+        <div class="search-box">
+            <input type="text" id="domainInput" placeholder="Enter domain (e.g., google.web3)...">
+            <button onclick="searchDomain()">Search</button>
+        </div>
+        
+        <div id="result"></div>
     </div>
+
+    <script>
+        async function searchDomain() {
+            const domain = document.getElementById('domainInput').value.trim().toLowerCase();
+            const resultBox = document.getElementById('result');
+            
+            if (!domain) {
+                alert('Please enter a domain name string to search.');
+                return;
+            }
+
+            resultBox.style.display = 'block';
+            resultBox.className = '';
+            resultBox.innerHTML = '🔍 Checking global root system registries...';
+
+            try {
+                // Queries your live 24/7 Render API endpoint directly
+                const response = await fetch(`/resolve?domain=${domain}`);
+                
+                if (response.status === 200) {
+                    const data = await response.json();
+                    resultBox.className = 'taken';
+                    resultBox.innerHTML = `❌ Domain Name Taken!<br>• String: ${data.domain}<br>• Resolves to IP: ${data.resolved_ip}`;
+                } else {
+                    resultBox.className = 'available';
+                    resultBox.innerHTML = `✅ Domain is Available!<br>• This string can be registered inside your custom registry root system.`;
+                }
+            } catch (error) {
+                resultBox.className = 'taken';
+                resultBox.innerHTML = '⚠️ Engine Error: Failed to connect to your live API infrastructure backend.';
+            }
+        }
+    </script>
 </body>
 </html>
+
