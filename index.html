@@ -5,65 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mavis-ican Registry Authority</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background: #0f0f12; color: #fff; padding-top: 50px; margin: 0; }
-        .card { border: 1px solid #27272a; padding: 40px 20px; display: inline-block; border-radius: 12px; background: #18181b; max-width: 500px; width: 90%; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        h1 { color: #22c55e; margin-bottom: 5px; font-size: 28px; }
-        p { color: #a1a1aa; margin-bottom: 30px; font-size: 15px; }
-        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
-        input { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #3f3f46; background: #09090b; color: #fff; font-size: 16px; outline: none; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background: #0f0f12; color: #fff; padding: 40px 20px; margin: 0; }
+        .card { border: 1px solid #27272a; padding: 30px 20px; display: inline-block; border-radius: 12px; background: #18181b; max-width: 500px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.5); margin-bottom: 20px; box-sizing: border-box; }
+        h1 { color: #22c55e; margin: 0 0 5px 0; font-size: 26px; }
+        p { color: #a1a1aa; margin: 0 0 25px 0; font-size: 14px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; color: #a1a1aa; font-size: 13px; }
+        .input-row { display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #3f3f46; background: #09090b; color: #fff; font-size: 15px; outline: none; width: 100%; box-sizing: border-box; }
         input:focus { border-color: #22c55e; }
-        button { padding: 12px 24px; border-radius: 6px; border: none; background: #22c55e; color: #000; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+        button { padding: 12px 24px; border-radius: 6px; border: none; background: #22c55e; color: #000; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
         button:hover { background: #4ade80; }
-        #result { padding: 15px; border-radius: 6px; font-weight: bold; margin-top: 15px; display: none; text-align: left; font-size: 14px; }
+        button.blue-btn { background: #3b82f6; color: #fff; width: 100%; white-space: normal; }
+        button.blue-btn:hover { background: #60a5fa; }
+        .result-box { padding: 15px; border-radius: 6px; font-weight: bold; margin-top: 15px; display: none; text-align: left; font-size: 14px; word-break: break-all; }
         .available { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; }
         .taken { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f87171; }
+
+        /* Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; font-size: 14px; }
+        th, td { padding: 10px; border-bottom: 1px solid #27272a; }
+        th { color: #22c55e; font-weight: 600; }
+        td { color: #e4e4e7; }
     </style>
 </head>
 <body>
+
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 🔍 SECTION 1: SEARCH DOMAINS -->
     <div class="card">
-        <h1>🌐 Mavis-ican Registry Engine</h1>
-        <p>Decentralized Global Domain Authority Infrastructure</p>
-        
-        <div class="search-box">
-            <input type="text" id="domainInput" placeholder="Enter domain (e.g., google.web3)...">
+        <h1>🌐 Mavis-ican Registry Search</h1>
+        <p>Query Global Decentralized Root Extensions</p>
+        <div class="input-row">
+            <input type="text" id="domainInput" placeholder="Enter domain (e.g., business.star)...">
             <button onclick="searchDomain()">Search</button>
         </div>
-        
-        <div id="result"></div>
+        <div id="result" class="result-box"></div>
+    </div>
+
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 ✍️ SECTION 2: REGISTER DOMAINS DIRECTLY -->
+    <div class="card">
+        <h1>✍️ Core Registration Portal</h1>
+        <p>Mint and Register New Strings Instantly</p>
+
+        <div class="form-group">
+            <label>Domain String Name</label>
+            <input type="text" id="regDomain" placeholder="e.g., business.star">
+        </div>
+
+        <div class="form-group">
+            <label>Target IP Address Route</label>
+            <input type="text" id="regIp" placeholder="e.g., 8.8.8.8">
+        </div>
+
+        <button class="blue-btn" onclick="registerDomain()">Register Domain Name Entry</button>
+        <div id="regResult" class="result-box"></div>
+    </div>
+
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 📊 SECTION 3: LIVE REGISTRY TABLE -->
+    <div class="card">
+        <h1>📊 Global Root Zone Directory</h1>
+        <p>Live Active Registrations Network-Wide</p>
+        <table id="directoryTable">
+            <thead>
+                <tr>
+                    <th>Domain Extension</th>
+                    <th>Target IP Route</th>
+                </tr>
+            </thead>
+            <tbody id="directoryBody">
+                <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 Javascript will insert data entries right here -->
+            </tbody>
+        </table>
     </div>
 
     <script>
-        async function searchDomain() {
+        // Database Initialization
+        if (!localStorage.getItem('mavis_dns')) {
+            localStorage.setItem('mavis_dns', JSON.stringify({
+                "google.web3": "127.0.0.1",
+                "shop.star": "192.168.1.50"
+            }));
+        }
+
+        // Render Directory List on boot load
+        updateDirectoryTable();
+
+        function searchDomain() {
             const domain = document.getElementById('domainInput').value.trim().toLowerCase();
             const resultBox = document.getElementById('result');
-            
-            if (!domain) {
-                alert('Please enter a domain name string to search.');
-                return;
-            }
+            if (!domain) return alert('Please enter a string.');
 
             resultBox.style.display = 'block';
-            resultBox.className = '';
-            resultBox.innerHTML = '🔍 Checking global root system registries...';
+            const db = JSON.parse(localStorage.getItem('mavis_dns'));
 
-            try {
-                // Queries your live 24/7 Render API endpoint directly
-                const response = await fetch(`/resolve?domain=${domain}`);
-                
-                if (response.status === 200) {
-                    const data = await response.json();
-                    resultBox.className = 'taken';
-                    resultBox.innerHTML = `❌ Domain Name Taken!<br>• String: ${data.domain}<br>• Resolves to IP: ${data.resolved_ip}`;
-                } else {
-                    resultBox.className = 'available';
-                    resultBox.innerHTML = `✅ Domain is Available!<br>• This string can be registered inside your custom registry root system.`;
-                }
-            } catch (error) {
-                resultBox.className = 'taken';
-                resultBox.innerHTML = '⚠️ Engine Error: Failed to connect to your live API infrastructure backend.';
+            if (db[domain]) {
+                resultBox.className = 'result-box taken';
+                resultBox.innerHTML = `❌ Domain Taken!<br>• String: ${domain}<br>• Resolves to Target IP: ${db[domain]}`;
+            } else {
+                resultBox.className = 'result-box available';
+                resultBox.innerHTML = `✅ Domain is Available!<br>• This string can be safely registered below.`;
+            }
+        }
+
+        function registerDomain() {
+            const domain = document.getElementById('regDomain').value.trim().toLowerCase();
+            const ip = document.getElementById('regIp').value.trim();
+            const regResultBox = document.getElementById('regResult');
+
+            if (!domain || !ip) return alert('Please complete all form fields.');
+
+            regResultBox.style.display = 'block';
+            const db = JSON.parse(localStorage.getItem('mavis_dns'));
+
+            db[domain] = ip;
+            localStorage.setItem('mavis_dns', JSON.stringify(db));
+
+            regResultBox.className = 'result-box available';
+            regResultBox.innerHTML = `🎉 Success! Registered ${domain} pointing to ${ip}.`;
+
+            document.getElementById('regDomain').value = '';
+            document.getElementById('regIp').value = '';
+
+            // Instantly update database tables
+            updateDirectoryTable();
+        }
+
+        function updateDirectoryTable() {
+            const tbody = document.getElementById('directoryBody');
+            const db = JSON.parse(localStorage.getItem('mavis_dns'));
+            tbody.innerHTML = ''; // Wipe list clean before re-rendering
+
+            for (const [domain, ip] of Object.entries(db)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td><strong>${domain}</strong></td><td><code>${ip}</code></td>`;
+                tbody.appendChild(row);
             }
         }
     </script>
 </body>
-</html>
-
+    </html>
+        
