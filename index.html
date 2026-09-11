@@ -5,31 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mavis-ican Registry Authority</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background: #0f0f12; color: #fff; padding: 40px 20px; margin: 0; }
-        .card { border: 1px solid #27272a; padding: 30px 20px; display: inline-block; border-radius: 12px; background: #18181b; max-width: 500px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.5); margin-bottom: 20px; box-sizing: border-box; }
-        h1 { color: #22c55e; margin: 0 0 5px 0; font-size: 26px; }
-        p { color: #a1a1aa; margin: 0 0 25px 0; font-size: 14px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background: #0a0a0f; color: #e2e8f0; padding: 40px 20px; margin: 0; }
+        .card { border: 1px solid #1f2937; padding: 30px 20px; display: inline-block; border-radius: 16px; background: #11111b; max-width: 500px; width: 100%; box-shadow: 0 4px 30px rgba(0,0,0,0.7); margin-bottom: 25px; box-sizing: border-box; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); border-color: #22c55e; }
+        h1 { color: #22c55e; margin: 0 0 5px 0; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 10px rgba(34, 197, 94, 0.2); }
+        p { color: #94a3b8; margin: 0 0 25px 0; font-size: 14px; }
         .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; margin-bottom: 5px; color: #a1a1aa; font-size: 13px; }
+        label { display: block; margin-bottom: 6px; color: #94a3b8; font-size: 13px; font-weight: 500; }
         .input-row { display: flex; gap: 10px; }
-        input { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #3f3f46; background: #09090b; color: #fff; font-size: 15px; outline: none; width: 100%; box-sizing: border-box; }
-        input:focus { border-color: #22c55e; }
-        button { padding: 12px 24px; border-radius: 6px; border: none; background: #22c55e; color: #000; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
-        button:hover { background: #4ade80; }
+        input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 15px; outline: none; width: 100%; box-sizing: border-box; transition: border 0.2s; }
+        input:focus { border-color: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.2); }
+        button { padding: 12px 24px; border-radius: 8px; border: none; background: #22c55e; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        button:hover { background: #4ade80; box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
         button.blue-btn { background: #3b82f6; color: #fff; width: 100%; white-space: normal; }
-        button.blue-btn:hover { background: #60a5fa; }
-        .result-box { padding: 15px; border-radius: 6px; font-weight: bold; margin-top: 15px; display: none; text-align: left; font-size: 14px; word-break: break-all; }
-        .available { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #4ade80; }
-        .taken { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f87171; }
+        button.blue-btn:hover { background: #60a5fa; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        button.danger-btn { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; width: 100%; margin-top: 15px; }
+        button.danger-btn:hover { background: #ef4444; color: #fff; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        .result-box { padding: 15px; border-radius: 8px; font-weight: bold; margin-top: 15px; display: none; text-align: left; font-size: 14px; word-break: break-all; }
+        .available { background: rgba(34, 197, 94, 0.05); border: 1px solid #22c55e; color: #4ade80; }
+        .taken { background: rgba(239, 68, 68, 0.05); border: 1px solid #ef4444; color: #f87171; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; font-size: 14px; }
-        th, td { padding: 10px; border-bottom: 1px solid #27272a; }
-        th { color: #22c55e; font-weight: 600; }
-        td { color: #e4e4e7; }
+        th, td { padding: 12px 10px; border-bottom: 1px solid #1f2937; }
+        th { color: #22c55e; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        td { color: #cbd5e1; }
+        code { background: #1e1e2f; padding: 4px 8px; border-radius: 4px; color: #3b82f6; font-family: monospace; }
     </style>
 </head>
 <body>
 
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 SECTION 1: SEARCH DOMAINS -->
     <div class="card">
         <h1>🌐 Mavis-ican Registry Search</h1>
         <p>Query Global Decentralized Root Extensions</p>
@@ -40,6 +45,7 @@
         <div id="result" class="result-box"></div>
     </div>
 
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 SECTION 2: REGISTER DOMAINS DIRECTLY -->
     <div class="card">
         <h1>✍️ Core Registration Portal</h1>
         <p>Mint and Register New Strings Instantly</p>
@@ -58,6 +64,7 @@
         <div id="regResult" class="result-box"></div>
     </div>
 
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 SECTION 3: LIVE REGISTRY TABLE & MANAGEMENT -->
     <div class="card">
         <h1>📊 Global Root Zone Directory</h1>
         <p>Live Active Registrations Network-Wide</p>
@@ -71,15 +78,19 @@
             <tbody id="directoryBody">
             </tbody>
         </table>
+
+        <button class="danger-btn" onclick="resetDatabase()">⚠️ Wipe System Database</button>
     </div>
 
     <script>
+        const DEFAULT_DATA = {
+            "google.web3": "127.0.0.1",
+            "shop.star": "192.168.1.50",
+            "business.star": "192.168.1.50"
+        };
+
         if (!localStorage.getItem('mavis_dns')) {
-            localStorage.setItem('mavis_dns', JSON.stringify({
-                "google.web3": "127.0.0.1",
-                "shop.star": "192.168.1.50",
-                "business.star": "192.168.1.50"
-            }));
+            localStorage.setItem('mavis_dns', JSON.stringify(DEFAULT_DATA));
         }
 
         updateDirectoryTable();
@@ -134,6 +145,16 @@
                 tbody.appendChild(row);
             }
         }
+
+        function resetDatabase() {
+            if (confirm("🚨 Warning! Are you sure you want to completely clear out all custom domain registry mappings?")) {
+                localStorage.setItem('mavis_dns', JSON.stringify(DEFAULT_DATA));
+                updateDirectoryTable();
+                document.getElementById('result').style.display = 'none';
+                document.getElementById('regResult').style.display = 'none';
+                alert("🔄 Database reverted back to baseline default records.");
+            }
+        }
     </script>
 </body>
-</html>
+    </html>
