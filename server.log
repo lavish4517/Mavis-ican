@@ -1,0 +1,19 @@
+nohup: ignoring input
+node:events:487
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: bind EADDRINUSE 0.0.0.0:5353
+    at node:dgram:398:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+Emitted 'error' event on Socket instance at:
+    at node:dgram:400:14
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21) {
+  errno: -98,
+  code: 'EADDRINUSE',
+  syscall: 'bind',
+  address: '0.0.0.0',
+  port: 5353
+}
+
+Node.js v26.3.1

@@ -1,0 +1,10 @@
+{
+  "name": "mini-icann-cloud",
+  "version": "1.0.0",
+  "description": "24/7 Decentralized Domain Registry Engine",
+  "main": "cloud-server.js",
+  "scripts": {
+    "start": "node cloud-server.js"
+  },
+  "dependencies": {}
+}
