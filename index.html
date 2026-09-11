@@ -3,157 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mavis-ican Registry Authority</title>
+    <title>Mavis-ican Web3 Registry</title>
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 Include Ethers.js script library to connect to blockchain networks -->
+    <script src="https://cloudflare.com"></script>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; text-align: center; background: #0a0a0f; color: #e2e8f0; padding: 40px 20px; margin: 0; }
-        .card { border: 1px solid #1f2937; padding: 30px 20px; display: inline-block; border-radius: 16px; background: #11111b; max-width: 500px; width: 100%; box-shadow: 0 4px 30px rgba(0,0,0,0.7); margin-bottom: 25px; box-sizing: border-box; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-2px); border-color: #22c55e; }
-        h1 { color: #22c55e; margin: 0 0 5px 0; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 10px rgba(34, 197, 94, 0.2); }
+        .card { border: 1px solid #1f2937; padding: 30px 20px; display: inline-block; border-radius: 16px; background: #11111b; max-width: 500px; width: 100%; box-shadow: 0 4px 30px rgba(0,0,0,0.7); margin-bottom: 25px; box-sizing: border-box; }
+        h1 { color: #22c55e; margin: 0 0 5px 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         p { color: #94a3b8; margin: 0 0 25px 0; font-size: 14px; }
         .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; margin-bottom: 6px; color: #94a3b8; font-size: 13px; font-weight: 500; }
+        label { display: block; margin-bottom: 6px; color: #94a3b8; font-size: 13px; }
         .input-row { display: flex; gap: 10px; }
-        input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 15px; outline: none; width: 100%; box-sizing: border-box; transition: border 0.2s; }
-        input:focus { border-color: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.2); }
-        button { padding: 12px 24px; border-radius: 8px; border: none; background: #22c55e; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 15px; outline: none; width: 100%; box-sizing: border-box; }
+        input:focus { border-color: #22c55e; }
+        button { padding: 12px 24px; border-radius: 8px; border: none; background: #22c55e; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: all 0.2s; }
         button:hover { background: #4ade80; box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
-        button.blue-btn { background: #3b82f6; color: #fff; width: 100%; white-space: normal; }
+        button.wallet-btn { background: #dfa823; color: #000; width: 100%; margin-bottom: 20px; }
+        button.wallet-btn:hover { background: #f0bd46; box-shadow: 0 0 15px rgba(223, 168, 35, 0.4); }
+        button.blue-btn { background: #3b82f6; color: #fff; width: 100%; }
         button.blue-btn:hover { background: #60a5fa; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
-        button.danger-btn { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; width: 100%; margin-top: 15px; }
-        button.danger-btn:hover { background: #ef4444; color: #fff; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
         .result-box { padding: 15px; border-radius: 8px; font-weight: bold; margin-top: 15px; display: none; text-align: left; font-size: 14px; word-break: break-all; }
-        .available { background: rgba(34, 197, 94, 0.05); border: 1px solid #22c55e; color: #4ade80; }
-        .taken { background: rgba(239, 68, 68, 0.05); border: 1px solid #ef4444; color: #f87171; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; font-size: 14px; }
-        th, td { padding: 12px 10px; border-bottom: 1px solid #1f2937; }
-        th { color: #22c55e; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
-        td { color: #cbd5e1; }
-        code { background: #1e1e2f; padding: 4px 8px; border-radius: 4px; color: #3b82f6; font-family: monospace; }
+        .status-ready { background: rgba(34, 197, 94, 0.05); border: 1px solid #22c55e; color: #4ade80; }
+        .status-error { background: rgba(239, 68, 68, 0.05); border: 1px solid #ef4444; color: #f87171; }
     </style>
 </head>
 <body>
 
-    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 SECTION 1: SEARCH DOMAINS -->
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 🔑 CONNECTION PORTAL -->
     <div class="card">
-        <h1>🌐 Mavis-ican Registry Search</h1>
-        <p>Query Global Decentralized Root Extensions</p>
-        <div class="input-row">
-            <input type="text" id="domainInput" placeholder="Enter domain (e.g., business.star)...">
-            <button onclick="searchDomain()">Search</button>
-        </div>
-        <div id="result" class="result-box"></div>
+        <h1>🔑 Web3 Authentication</h1>
+        <p>Link Your Cryptographic Identity Engine</p>
+        <button class="wallet-btn" id="connectButton" onclick="connectWallet()">Connect Crypto Wallet</button>
+        <div id="walletStatus" style="font-size:12px; color:#94a3b8;">Status: Disconnected</div>
     </div>
 
-    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 SECTION 2: REGISTER DOMAINS DIRECTLY -->
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 🔍 DOMAIN SEARCH -->
     <div class="card">
-        <h1>✍️ Core Registration Portal</h1>
-        <p>Mint and Register New Strings Instantly</p>
+        <h1>🌐 Blockchain Registry Search</h1>
+        <p>Query On-Chain Root Architecture Mappings</p>
+        <div class="input-row">
+            <input type="text" id="domainInput" placeholder="Enter domain (e.g., test.star)...">
+            <button onclick="searchBlockchainDomain()">Search</button>
+        </div>
+        <div id="searchResult" class="result-box"></div>
+    </div>
 
+    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 ✍️ LIVE BLOCKCHAIN REGISTRATION -->
+    <div class="card">
+        <h1>✍️ Mint New Web3 String</h1>
+        <p>Execute Blockchain Transaction to Claim Domain</p>
         <div class="form-group">
             <label>Domain String Name</label>
-            <input type="text" id="regDomain" placeholder="e.g., business.star">
+            <input type="text" id="regDomain" placeholder="e.g., company.star">
         </div>
-
         <div class="form-group">
-            <label>Target IP Address Route</label>
+            <label>Target IP Route Address</label>
             <input type="text" id="regIp" placeholder="e.g., 8.8.8.8">
         </div>
-
-        <button class="blue-btn" onclick="registerDomain()">Register Domain Name Entry</button>
-        <div id="regResult" class="result-box"></div>
-    </div>
-
-    <-rwxr-sr-x  1 root  flaggroup  45024 Sep  4 12:00 SECTION 3: LIVE REGISTRY TABLE & MANAGEMENT -->
-    <div class="card">
-        <h1>📊 Global Root Zone Directory</h1>
-        <p>Live Active Registrations Network-Wide</p>
-        <table id="directoryTable">
-            <thead>
-                <tr>
-                    <th>Domain Extension</th>
-                    <th>Target IP Route</th>
-                </tr>
-            </thead>
-            <tbody id="directoryBody">
-            </tbody>
-        </table>
-
-        <button class="danger-btn" onclick="resetDatabase()">⚠️ Wipe System Database</button>
+        <button class="blue-btn" onclick="mintOnChainDomain()">Mint Domain via Wallet</button>
+        <div id="mintResult" class="result-box"></div>
     </div>
 
     <script>
-        const DEFAULT_DATA = {
-            "google.web3": "127.0.0.1",
-            "shop.star": "192.168.1.50",
-            "business.star": "192.168.1.50"
-        };
+        let userWalletAddress = null;
+        let provider = null;
+        let signer = null;
 
-        if (!localStorage.getItem('mavis_dns')) {
-            localStorage.setItem('mavis_dns', JSON.stringify(DEFAULT_DATA));
-        }
+        // Mock Deployment Contract Configurations for testing purposes
+        const CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+        const CONTRACT_ABI = [];
 
-        updateDirectoryTable();
+        async function connectWallet() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    provider = new ethers.BrowserProvider(window.ethereum);
+                    const accounts = await provider.send("eth_requestAccounts", []);
+                    signer = await provider.getSigner();
+                    userWalletAddress = accounts[0];
 
-        function searchDomain() {
-            const domain = document.getElementById('domainInput').value.trim().toLowerCase();
-            const resultBox = document.getElementById('result');
-            if (!domain) return alert('Please enter a string.');
-
-            resultBox.style.display = 'block';
-            const db = JSON.parse(localStorage.getItem('mavis_dns'));
-
-            if (db[domain]) {
-                resultBox.className = 'result-box taken';
-                resultBox.innerHTML = `❌ Domain Taken!<br>• String: ${domain}<br>• Resolves to Target IP: ${db[domain]}`;
+                    document.getElementById('connectButton').innerText = "Wallet Linked!";
+                    document.getElementById('walletStatus').innerHTML = `Connected Securely: <code>${userWalletAddress.substring(0,6)}...${userWalletAddress.substring(38)}</code>`;
+                } catch (err) {
+                    alert("User rejected cryptographic connection request.");
+                }
             } else {
-                resultBox.className = 'result-box available';
-                resultBox.innerHTML = `✅ Domain is Available!<br>• This string can be safely registered below.`;
+                alert("Crypto wallet engine not detected. Please use a Web3 browser layout like MetaMask, Trust Wallet, or Brave.");
             }
         }
 
-        function registerDomain() {
+        function searchBlockchainDomain() {
+            const domain = document.getElementById('domainInput').value.trim().toLowerCase();
+            const resultBox = document.getElementById('searchResult');
+            if(!domain) return alert('Please input a string.');
+
+            resultBox.style.display = "block";
+            resultBox.className = "result-box status-ready";
+            resultBox.innerHTML = `🔍 Simulating smart contract call for [${domain}]...<br><span style='color:#94a3b8; font-size:12px;'>When deployed, this initiates a gasless read call directly to the chain ledger node.</span>`;
+        }
+
+        function mintOnChainDomain() {
             const domain = document.getElementById('regDomain').value.trim().toLowerCase();
             const ip = document.getElementById('regIp').value.trim();
-            const regResultBox = document.getElementById('regResult');
+            const resultBox = document.getElementById('mintResult');
 
-            if (!domain || !ip) return alert('Please complete all form fields.');
+            if (!userWalletAddress) return alert('Please link your cryptographic authentication wallet first.');
+            if (!domain || !ip) return alert('Please clear all processing inputs.');
 
-            regResultBox.style.display = 'block';
-            const db = JSON.parse(localStorage.getItem('mavis_dns'));
-
-            db[domain] = ip;
-            localStorage.setItem('mavis_dns', JSON.stringify(db));
-
-            regResultBox.className = 'result-box available';
-            regResultBox.innerHTML = `🎉 Success! Registered ${domain} pointing to ${ip}.`;
-
-            document.getElementById('regDomain').value = '';
-            document.getElementById('regIp').value = '';
-
-            updateDirectoryTable();
-        }
-
-        function updateDirectoryTable() {
-            const tbody = document.getElementById('directoryBody');
-            const db = JSON.parse(localStorage.getItem('mavis_dns'));
-            tbody.innerHTML = '';
-
-            for (const [domain, ip] of Object.entries(db)) {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td><strong>${domain}</strong></td><td><code>${ip}</code></td>`;
-                tbody.appendChild(row);
-            }
-        }
-
-        function resetDatabase() {
-            if (confirm("🚨 Warning! Are you sure you want to completely clear out all custom domain registry mappings?")) {
-                localStorage.setItem('mavis_dns', JSON.stringify(DEFAULT_DATA));
-                updateDirectoryTable();
-                document.getElementById('result').style.display = 'none';
-                document.getElementById('regResult').style.display = 'none';
-                alert("🔄 Database reverted back to baseline default records.");
-            }
+            resultBox.style.display = "block";
+            resultBox.className = "result-box status-ready";
+            resultBox.innerHTML = `📡 Staging transaction package...<br>Awaiting user signature in MetaMask to burn gas and write <strong>${domain}</strong> to the block ledger.`;
         }
     </script>
 </body>
