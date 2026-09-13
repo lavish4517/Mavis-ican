@@ -211,6 +211,67 @@ function injectModalCSS() {
     document.head.appendChild(style);
 }
 </script>
+<!-- Include official Ethers.js and WalletConnect Web3Modal libraries -->
+<script src="https://cloudflare.com"></script>
+<script src="https://unpkg.com"></script>
+<script src="https://unpkg.com"></script>
+
+<script>
+let provider;
+let signer;
+let userAddress;
+
+// Configure the connection utility settings
+const Web3Modal = window.Web3Modal.default;
+const WalletConnectProvider = window.WalletConnectProvider.default;
+
+const providerOptions = {
+  walletconnect: {
+    package: WalletConnectProvider,
+    options: {
+      // Replace with a valid Project ID from ://walletconnect.com
+      rpc: {
+        1: "https://cloudflare-eth.com", // Mainnet
+        137: "https://polygon-rpc.com"   // Polygon Network
+      }
+    }
+  }
+};
+
+const web3Modal = new Web3Modal({
+  cacheProvider: false, 
+  providerOptions,
+  theme: "dark"
+});
+
+async function initiateRealConnection() {
+  try {
+    // This triggers the official modal displaying MetaMask, Trust, WalletConnect, etc.
+    const instance = await web3Modal.connect();
+    provider = new ethers.BrowserProvider(instance);
+    signer = await provider.getSigner();
+    userAddress = await signer.getAddress();
+
+    // Update the UI state upon successful authentication
+    const statusLabel = document.getElementById('walletStatus');
+    if (statusLabel) {
+      statusLabel.innerText = `Status: Connected (${userAddress.substring(0,6)}...)`;
+      statusLabel.style.color = "#4ade80";
+    }
+
+    // Enable application inputs
+    document.querySelectorAll('input, button').forEach(el => el.disabled = false);
+
+  } catch (error) {
+    console.error("Wallet connection closed or rejected:", error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const connectBtn = document.getElementById('connectButton');
+  if (connectBtn) connectBtn.addEventListener('click', initiateRealConnection);
+});
+</script>
 
 </body>
 </html>
